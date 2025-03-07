@@ -42,6 +42,8 @@ async def generate_response(prompt, instructions, history=None):
                     {"role": "user", "content": prompt},
                     *history,
                 ],
+                max_completion_tokens=4096,
+                reasoning_format="hidden"
             )
         else:
             response = await client.chat.completions.create(
@@ -50,6 +52,8 @@ async def generate_response(prompt, instructions, history=None):
                     {"role": "system", "content": instructions},
                     {"role": "user", "content": prompt},
                 ],
+                max_completion_tokens=4096,
+                reasoning_format="hidden"
             )
 
         return response.choices[0].message.content
